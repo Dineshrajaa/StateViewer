@@ -34,7 +34,7 @@ $(document).ready(function(){
 			$("#countryList").append("<li id='"+j+"'><a href='#'>"+countryNames[j]+"</a></li>");
 		}
 		$("#countryList").listview("refresh");
-		//alert(("#countryList li").length);
+		
 		
 	}
 
@@ -48,31 +48,48 @@ $(document).ready(function(){
 			var footerSize=$(".ui-footer", currentPage).outerHeight()-1;
 			var scrolled = $(window).scrollTop();
 			var scrollEnd = contentHeight-pageHeight+headerSize+footerSize;
-			/*alert("PageHeight "+pageHeight);
-			alert("contentHeight "+contentHeight);
-			alert("HeaderSize "+headerSize);
-			alert("FooterSize "+footerSize);
-			alert("Scrolled "+scrolled);
-			alert("Scrollend "+scrollEnd);*/
+			
 			if (currentPage.id=="home-page"&&scrolled >= scrollEnd) {
 				addListItems(currentPage);
 			}
 		}
 
+		/*function continueListing(listLength,newListLength){
+			for (var k = listLength; k < newListLength; k++) {    	
+      $("#countryList").append("<li id='"+k+"'><a href='#'>"+countryNames[k]+"</a></li>");   
+             }
+   $("#countryList").listview("refresh");
+    $.mobile.loading("hide");
+    $(document).on("scrollstop", scrollChecker);
+  
+		} */
 		function addListItems(presentPage){
+			var newListLength,listLength;
+			var limit=249;
 			$(document).off("scrollstop");
 			$.mobile.loading("show", {
     		text: "Loading..",
    			textVisible: true
-  			});
-  			setTimeout(function() {
-    		var listLength=$("li",presentPage).length;
-    		var newListLength=listLength+5;
-    
-    for (var k = listLength; k < newListLength; k++) {
-      $("#countryList").append("<li id='"+k+"'><a href='#'>"+countryNames[k]+"</a></li>");
-    }
+  			}); 			
+   			setTimeout(function(){ 			
+    		listLength=$("li",presentPage).length;
+    		newListLength=listLength+5;  
+    		if (listLength<=limit) {
+    			//alert("Loading");
+    			for (var k = listLength; k < newListLength; k++) {    	
+      $("#countryList").append("<li id='"+k+"'><a href='#'>"+countryNames[k]+"</a></li>");   
+             }
    $("#countryList").listview("refresh");
+    		}
+    		else {
+    			$("#countryList").find("li:contains('undefined')").remove();
+    			$("#countryList").listview("refresh");
+    			alert("Loaded Fully");
+    	}
+    /*for (var k = listLength; k < newListLength; k++) {    	
+      $("#countryList").append("<li id='"+k+"'><a href='#'>"+countryNames[k]+"</a></li>");   
+             }
+   $("#countryList").listview("refresh");*/
     $.mobile.loading("hide");
     $(document).on("scrollstop", scrollChecker);
   }, 500);
@@ -85,8 +102,14 @@ $(document).ready(function(){
 	
 
 	//Function Calls
-	readCountries();
-	$(document).on("scrollstop", scrollChecker);
+	//readCountries();
+	
+	document.addEventListener("deviceready",function(){
+		readCountries();
+		setTimeout(function(){
+			$(document).on("scrollstop", scrollChecker);
+		},500);
+	});
 	
 	//Loaded all the elements into DOM
 });
