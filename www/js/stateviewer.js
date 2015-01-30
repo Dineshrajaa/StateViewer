@@ -134,7 +134,7 @@ $(document).ready(function(){
 	/**Information Showing Methods**/
 	function infoShow(){
 			//Displays App Info
-			alert("StateLister"+"\n"+"Version-0.0.1"+"\n"+"Author-Dinesh Raja");
+			alert("StateViewer"+"\n"+"Version-0.0.1"+"\n"+"Author-Dinesh Raja");
 		}
 
 	//Function Calls
