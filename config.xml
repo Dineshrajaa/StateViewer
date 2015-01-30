@@ -29,5 +29,24 @@
     <preference name="android-installLocation" value="auto" />
     <preference name="SplashScreenDelay" value="10000" />
     <preference name="StatusBarOverlaysWebView" value="true" />
+
+    <!--ICON FOR ALL-->
+    <icon src="icon.png" />
+    <!--ICON FOR ios-->
+    <icon src="res/icon/ios/icon-60@3x.png" gap:platform="ios" width="180" height="180" />
+    <icon src="res/icon/ios/icon-60.png" gap:platform="ios" width="60" height="60" />
+    <icon src="res/icon/ios/icon-60@2x.png" gap:platform="ios" width="120" height="120" />
+    <icon src="res/icon/ios/icon-76.png" gap:platform="ios" width="76" height="76" />
+    <icon src="res/icon/ios/icon-76@2x.png" gap:platform="ios" width="152" height="152" />
+    <icon src="res/icon/ios/icon-40.png" gap:platform="ios" width="40" height="40" />
+    <icon src="res/icon/ios/icon-40@2x.png" gap:platform="ios" width="80" height="80" />
+
+    <!--ICONS FOR Android-->
+    <icon src="res/icon/android/ldpi.png" gap:platform="android" gap:qualifier="ldpi" />
+    <icon src="res/icon/android/mdpi.png" gap:platform="android" gap:qualifier="mdpi" />
+    <icon src="res/icon/android/hdpi.png" gap:platform="android" gap:qualifier="hdpi" />
+    <icon src="res/icon/android/xhdpi.png" gap:platform="android" gap:qualifier="xhdpi" />
+    <icon src="res/icon/android/xxhdpi.png" gap:platform="android" gap:qualifier="xxhdpi" />
+    <icon src="res/icon/android/fr-xxhdpi.png" gap:platform="android" gap:qualifier="fr-xxhdpi" />
     
 </widget>
