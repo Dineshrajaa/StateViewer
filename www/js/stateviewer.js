@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	var webserviceFile="http://services.groupkt.com/country/get/all";
+	var stateWebService="http://services.groupkt.com/state/search/IND?text="
 	var countryNames=[];
+	
 
 			/*Country Listing Methods*/
 	function readCountries(){
@@ -30,15 +32,14 @@ $(document).ready(function(){
 	function listCountries(){
 		//Lists the CountryNames from Webservice
 		
-		for(var j=0;j<countryNames.length-234;j++){
+		for(var j=0;j<15;j++){
 			$("#countryList").append("<li id='"+j+"'><a href='#'>"+countryNames[j]+"</a></li>");
 		}
-		$("#countryList").listview("refresh");
-		
+		$("#countryList").listview("refresh");	
 		
 	}
 
-			/**Testing Methods**/
+			
 		function scrollChecker(){
 			
 			var currentPage=$(':mobile-pagecontainer').pagecontainer('getActivePage')[0];			
@@ -54,15 +55,6 @@ $(document).ready(function(){
 			}
 		}
 
-		/*function continueListing(listLength,newListLength){
-			for (var k = listLength; k < newListLength; k++) {    	
-      $("#countryList").append("<li id='"+k+"'><a href='#'>"+countryNames[k]+"</a></li>");   
-             }
-   $("#countryList").listview("refresh");
-    $.mobile.loading("hide");
-    $(document).on("scrollstop", scrollChecker);
-  
-		} */
 		function addListItems(presentPage){
 			var newListLength,listLength;
 			var limit=249;
@@ -74,8 +66,7 @@ $(document).ready(function(){
    			setTimeout(function(){ 			
     		listLength=$("li",presentPage).length;
     		newListLength=listLength+5;  
-    		if (listLength<=limit) {
-    			//alert("Loading");
+    		if (listLength<=limit) {    			
     			for (var k = listLength; k < newListLength; k++) {    	
       $("#countryList").append("<li id='"+k+"'><a href='#'>"+countryNames[k]+"</a></li>");   
              }
@@ -86,24 +77,68 @@ $(document).ready(function(){
     			$("#countryList").listview("refresh");
     			alert("Loaded Fully");
     	}
-    /*for (var k = listLength; k < newListLength; k++) {    	
-      $("#countryList").append("<li id='"+k+"'><a href='#'>"+countryNames[k]+"</a></li>");   
-             }
-   $("#countryList").listview("refresh");*/
+    
     $.mobile.loading("hide");
     $(document).on("scrollstop", scrollChecker);
   }, 500);
   			
 		}
 
-		
-			/**End of Testing Methods**/
+			/**End of Country Listing Code**/
 
-	
+			/**State Search Methods**/
+		$("#searchBox").on("input",function(){
+			//Method to find what is being typed
+			searchState($(this).val());			
+		});
+		function searchState(typed){
+			//Method to access Webservice
+			var stateNames=[];
+			$.ajax({
+		type:"GET",
+		url:stateWebService+typed,
+		dataType:"json",
+		success:function(loadedStates){			
+			var noStates=loadedStates.RestResponse.result.length;
+			for(var i=0;i<noStates;i++){
+				stateNames.push(loadedStates.RestResponse.result[i].name);
+			} 
+			printStates(stateNames);
+			
+		},
+		error:function(){
+			alert("Couldn't Read JSON File");
+		}
+	//End of AJAX Call
+});	
+
+		}
+
+		function printStates(stateList){
+			var printableStates='';
+			for(var l=0;l<stateList.length;l++){
+				printableStates+=stateList[l]+"<br/>";
+			}
+			$("#outputDiv").html(printableStates);
+		}
+
+		function clearContents(){
+				//Method to clean Searched data				
+				$("#outputDiv").html(" ");
+				$("searchBox").val(" ");
+			}
+
+		/**End of StateSearch Methods**/
+			
+
+	/**Information Showing Methods**/
+	function infoShow(){
+			//Displays App Info
+			alert("StateLister"+"\n"+"Version-0.0.1"+"\n"+"Author-Dinesh Raja");
+		}
 
 	//Function Calls
-	//readCountries();
-	
+	$("#clearbtn").tap(clearContents);		
 	document.addEventListener("deviceready",function(){
 		readCountries();
 		setTimeout(function(){
@@ -111,5 +146,6 @@ $(document).ready(function(){
 		},500);
 	});
 	
+	$("#infopgbtn").tap(infoShow);
 	//Loaded all the elements into DOM
 });
