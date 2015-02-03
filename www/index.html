@@ -14,29 +14,41 @@
         <title>StateViewer</title>
     </head>
     <body>
-        <section data-role="page" id="home-page">
+        <div id="popMan" data-theme="b" data-arrow="true">
+        <ul data-role="listview">
+            <li>Options</li>
+            <li><a href="#home-page">Country List</a></li>
+            <li><a href="#search-page">State Search</a></li>
+        </ul>
+        </div>
+        <section data-role="page" data-url="home-page" id="home-page">
             <header data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-                <a href="#search-page" data-role="button" data-icon="search" data-iconpos="notext" id="searchpgbtn">Search</a>
+                <!--<a href="#search-page" data-role="button" data-icon="search" data-iconpos="notext" id="searchpgbtn">Search</a>-->
+                <a href="#popMan" data-rel="popup" data-icon="bars" data-iconpos="notext" data-transition="turn">Menu</a>
                 <h1>CountryList</h1>
                 <a href="#" data-role="button" data-icon="info" data-iconpos="notext" id="infopgbtn">Info</a>
             </header>
             <article data-role="main" class="ui-content">
-                <ul data-role="listview" id="countryList"></ul>                
+                <ul data-role="listview" id="countryList" data-filter="true" data-autodividers="true"></ul>                
             </article>
             <footer data-role="footer" data-position="fixed" data-theme="b" data-tap-toggle="false">
                 <h1>&copy All Rights Reserved</h1>
             </footer>
         </section>
-        <section data-role="page" id="search-page">
+        <section data-role="page" data-url="search-page" id="search-page">
         <header data-role="header" data-theme="b" data-position="fixed">
-        <a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-rel="back" id="clearbtn">Back</a>
+        <a href="#popMan" data-rel="popup" data-icon="bars" data-iconpos="notext" data-transition="turn">Menu</a>
+        <!--<a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-rel="back" id="clearbtn">Back</a>-->
         <h1>State Search</h1>
+        <a href="#" data-role="button" data-icon="info" data-iconpos="notext" id="infopgbtn">Info</a>
         </header>
+
         <article data-role="main">
-            <input type="text" id="searchBox" placeholder="Enter State name"/>
+            <input type="text" id="searchBox" placeholder="Enter State name" data-type="search"/>
             <div id="outputDiv"></div>
         </article>
         </section>
+        
         <script type="text/javascript" src="cordova.js"></script>        
     </body>
 </html>

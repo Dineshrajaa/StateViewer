@@ -146,6 +146,8 @@ $(document).ready(function(){
 		},500);
 	});
 	
+	//Create PopUp
+	$("#popMan").enhanceWithin().popup();
 	$("#infopgbtn").tap(infoShow);
 	//Loaded all the elements into DOM
 });
