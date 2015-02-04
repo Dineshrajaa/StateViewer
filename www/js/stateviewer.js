@@ -115,17 +115,20 @@ $(document).ready(function(){
 		}
 
 		function printStates(stateList){
-			var printableStates='';
+			//var printableStates='';
+			$("#stater").html(" ");
 			for(var l=0;l<stateList.length;l++){
-				printableStates+=stateList[l]+"<br/>";
+				//printableStates+=stateList[l]+"<br/>";
+				$("#stater").append("<li id='"+l+"'><a href='#'>"+stateList[l]+"</a></li>");
 			}
-			$("#outputDiv").html(printableStates);
+			$("#stater").listview("refresh");
+			//$("#outputDiv").html(printableStates);
 		}
 
 		function clearContents(){
 				//Method to clean Searched data				
 				$("#outputDiv").html(" ");
-				$("searchBox").val(" ");
+				$("#searchBox").val(" ");
 			}
 
 		/**End of StateSearch Methods**/
