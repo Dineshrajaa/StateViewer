@@ -19,6 +19,7 @@ $(document).ready(function(){
 			for(var i=0;i<noCountries;i++){
 				countryNames.push(loadedData.RestResponse.result[i].name);
 			} 
+			countryNames[1]='Aland Islands';
 			listCountries();
 		},
 		error:function(){
@@ -70,6 +71,7 @@ $(document).ready(function(){
     			for (var k = listLength; k < newListLength; k++) {    	
       $("#countryList").append("<li id='"+k+"'><a href='#'>"+countryNames[k]+"</a></li>");   
              }
+
    $("#countryList").listview("refresh");
     		}
     		else {
